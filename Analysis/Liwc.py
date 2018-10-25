@@ -2,21 +2,31 @@ import nltk
 import csv 
 import re 
 import datetime 
+import itertools
 
 now = datetime.datetime.now()
 today = now.strftime("%Y-%m-%d")
 
-oplexicon = open('Lexicon/OpLexicon/lexico_v2.txt', 'r', encoding="utf8") 
+liwc = open('Lexicon/Liwc/liwc_pt.txt', 'r')
+count = 0
+for line in liwc.readlines(): count += 1
 
 dic_palavra = {}
-for i in oplexicon.readlines():
-    pos_ponto = i.find(',')
-    palavra = (i[:pos_ponto])
-    pol_pos = re.findall(r'-?\d+\.?\d*', str(i))
-    if pol_pos:
-        polaridade = pol_pos[0]
-        dic_palavra[palavra] = polaridade
-
+liwc = open('Lexicon/Liwc/liwc_pt.txt', 'r')
+pol = {}
+for line in itertools.islice(liwc, 67, count):
+    pos_ponto = line.replace('\\t',',')
+    p1 = pos_ponto.find(',')
+    palavra = (line[:p1])
+    polar = line[p1:].replace('\\t',',')
+    if '127' in polar:
+        polar = '-1'
+    else: 
+        if '126' in polar:
+            polar = '1'
+        polar = '0'
+    dic_palavra[palavra] = polar
+    
 def Score_sentimento(frase):
     frase = frase.lower()
     l_sentimento = []
@@ -38,10 +48,10 @@ def RunAnalysis(fonte):
     with open(fonte + today +'/dataset.csv', encoding="utf8") as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
-        dataInfomoney = [r for r in reader]
-    with open(fonte + today +'/polarityOpLexicon.csv', mode='w', encoding="utf8") as employee_file:
+        dataInfo = [r for r in reader]
+    with open(fonte + today +'/polarityLiwc.csv', mode='w', encoding="utf8") as employee_file:
         employee_writer = csv.writer(employee_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)    
-        for lista2 in dataInfomoney:
+        for lista2 in dataInfo:
             try:
                 x = Score_sentimento(lista2[2])
                 x = str(x)

@@ -34,7 +34,6 @@ dInvesting = 'C:/Users/vitor/Documents/GetDataset/Investing.com/'
 dTrading = 'C:/Users/vitor/Documents/GetDataset/TradingView/'
 
 def RunAnalysis(fonte):
-    # INFOMONEY
     with open(fonte + today +'/dataset.csv', encoding="utf8") as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
