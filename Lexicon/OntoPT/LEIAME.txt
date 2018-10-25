@@ -1,0 +1,33 @@
+Synsets polarizados Onto.PT v0.6
+Data: Abril de 2014
+---------------------------------
+
+Conteúdo:
+Este pacote contém um subconjunto de synsets do Onto.PT v0.6 a que foram atribuídas
+automaticamente polaridades indicadores do sentimento por eles transmitido.
+
+Formato:
+Cada linha do ficheiro disponibilizado contém 5 campos, nomeadamente:
+polaridade : categoria_gramatical : synset : [relações_utilizadas] : iteração_polarizado
+
+Criação:
+O processo de atribuição de polaridades subdividiu-se em duas partes:
+(1) Atribuição da polaridade mais representativa no lemas de cada synset, com base no
+léxico de polaridades SentiLexPT02 (http://dmir.inesc-id.pt/project/SentiLex-PT_02)
+(2) Propagação da mesma polaridade por relações do tipo temQualidade, temEstado, maneiraDe, 
+e da polaridade inversa por relações do tipo antonimoDe e maneiraSem
+
+Avaliação:
+A avalição da aplicação deste procedimento para o Onto.PT v0.3.5 resultou numa precisão entre 70%-79%.
+
+Referência:
+Hugo Gonçalo Oliveira, António Paulo Santos & Paulo Gomes.
+Assigning Polarity Automatically to the Synsets of a Wordnet-like Resource.
+In Proceedings of 3rd Symposium on Languages, Applications and Technologies (SLATE 2013),
+19-20 June, 2014, Bragança, Portugal. OASICS.
+
+-----------------------
+Contactos:
+Hugo Gonçalo Oliveira
+E-mail: hroliv@dei.uc.pt
+URL projeto: http://ontopt.dei.uc.pt
