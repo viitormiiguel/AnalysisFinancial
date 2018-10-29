@@ -1,4 +1,5 @@
 import nltk 
+nltk.download('stopwords')
 import csv 
 import re 
 import datetime 

@@ -13,7 +13,7 @@ dInvesting = 'C:/Users/vitor/Documents/GetDataset/Investing.com/'
 dTrading = 'C:/Users/vitor/Documents/GetDataset/TradingView/'
 
 # Resultados Investing.com
-r_investing = open(dInvesting + today +'/polarityOpLexicon.csv', 'r', encoding='utf8')
+r_investing = open(dInvesting + today +'/polarityOpLexiconPre.csv', 'r', encoding='utf8')
 posInv = 0 
 neuInv = 0 
 negInv = 0
@@ -26,7 +26,7 @@ for t in r_investing.readlines():
         negInv += 1
 
 # Resultados InfoMoney
-r_infomoney = open(dInfoMoney + today +'/polarityOpLexicon.csv', 'r', encoding='utf8')
+r_infomoney = open(dInfoMoney + today +'/polarityOpLexiconPre.csv', 'r', encoding='utf8')
 posInf = 0
 neuInf = 0 
 negInf = 0
@@ -39,7 +39,7 @@ for t in r_infomoney.readlines():
         negInf += 1
 
 # Resultados TradingView
-r_tradingview = open(dTrading + today +'/polarityOpLexicon.csv', 'r', encoding='utf8')
+r_tradingview = open(dTrading + today +'/polarityOpLexiconPre.csv', 'r', encoding='utf8')
 posTrd = 0
 neuTrd = 0 
 negTrd = 0
