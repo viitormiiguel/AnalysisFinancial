@@ -3,6 +3,7 @@ nltk.download('stopwords')
 import csv 
 import re 
 import datetime 
+import importlib
 
 now = datetime.datetime.now()
 today = now.strftime("%Y-%m-%d")
@@ -72,13 +73,15 @@ def RunAnalysis(fonte, tipo):
         employee_writer = csv.writer(employee_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)    
         for lista2 in dataInfo:
             try:
-                if tipo == 'polaritySentiLexNo':
-                    x = Score_sentimento_pre(lista2[2])
-                    x = str(x)
-                else:
-                    x = Score_sentimento(lista2[2])
-                    x = str(x)
-                employee_writer.writerow([lista2[2], x])
+                # Contar apenas textos ja rotulados
+                if lista2[1]:
+                    if tipo == 'polaritySentiLexNo':
+                        x = Score_sentimento_pre(lista2[2])
+                        x = str(x)
+                    else:
+                        x = Score_sentimento(lista2[2])
+                        x = str(x)
+                    employee_writer.writerow([lista2[2], x])
             except IndexError:
                 x = 'null'
 
