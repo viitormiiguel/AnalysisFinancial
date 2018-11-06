@@ -8,6 +8,7 @@ def get_index(in_list, in_string):
 book = open('C:/Users/vitor/Documents/Python Projects/AnalysisFinancial/BuildLex/ebook.txt', 'r').read()
 
 rows = book.split('\n')
+print(len(rows))
 
 start_idx = get_index(rows, ' START')
 end_idx = get_index(rows, ' END')
@@ -29,5 +30,5 @@ text = nltk.Text(words)
 
 freq = nltk.FreqDist(text)
 
-freq.most_common(30)
-freq.plot(30)
+# freq.most_common(30)
+# freq.plot(30)

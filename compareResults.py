@@ -32,7 +32,7 @@ def RunCompare(fonte, tipo):
                 if v1[1]:
                     print(v1[1])
             except IndexError:
-                x = 'null'            
+                _ = 'null'            
         # for valores in dados2:
         #     try:
         #         if valores[1]:
