@@ -1,9 +1,10 @@
 import nltk 
-nltk.download('stopwords')
 import csv 
 import re 
 import datetime 
 import itertools
+import importlib
+import imp
 
 now = datetime.datetime.now()
 today = now.strftime("%Y-%m-%d")

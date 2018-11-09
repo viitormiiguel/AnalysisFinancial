@@ -32,7 +32,7 @@ def RunCompare(fonte, tipo):
                 if v1[1]:
                     print(v1[1])
             except IndexError:
-                _ = 'null'            
+                x = 'null'            
         # for valores in dados2:
         #     try:
         #         if valores[1]:
@@ -73,8 +73,7 @@ def Teste(fonte, tipo):
     with open(fonte + today +'/' + tipo + '.csv', encoding="utf8") as d1:
         with open(fonte + today + '/dataset.csv', encoding="utf8") as d2:
             same = set(d1).intersection(d2)
-
     same.discard('\n')
-    
+    with open(fonte + today + 'teste.csv')
 
 Teste(dTrading,'polaritySentiLexPre')
