@@ -2,6 +2,7 @@ import csv
 import re 
 import importlib 
 import datetime 
+import imp
 
 now = datetime.datetime.now()
 today = now.strftime("%Y-%m-%d")
@@ -27,13 +28,28 @@ def RunCompare(fonte, tipo):
         next(reader)
         dados2 = [t for t in reader]
         # print(dados2[2][2])
-        for v1 in dados2:
-            try:
-                if v1[1]:
-                    print(v1[1])
-            except IndexError:
-                x = 'null'            
-        # for valores in dados2:
+        with open (fonte + today + '/compare.csv', mode='w', encoding='utf8') as new_file:
+            new_file = csv.writer(new_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            for v1 in dados2:
+                try:
+                    if v1[1]:
+                        new_file.writerow([v1[2], v1[1]])
+                except IndexError:
+                    x = 'null'            
+            
+
+RunCompare(dTrading, 'polaritySentiLexPre')
+
+# def Teste(fonte, tipo):
+#     with open(fonte + today +'/' + tipo + '.csv', encoding="utf8") as d1:
+#         with open(fonte + today + '/dataset.csv', encoding="utf8") as d2:
+#             same = set(d1).intersection(d2)
+#     same.discard('\n')
+#     with open(fonte + today + 'teste.csv')
+
+# Teste(dTrading,'polaritySentiLexPre')
+
+# for valores in dados2:
         #     try:
         #         if valores[1]:
         #             x = 'Teste'
@@ -65,15 +81,4 @@ def RunCompare(fonte, tipo):
         # print("Neutros: ", countNeu)
         # print("Lex Positivos: ", lexPos)
         # print('Lex Negativos: ', lexNeg)
-        # print('Lex Neutros: ', lexNeu)        
-
-RunCompare(dTrading, 'polaritySentiLexPre')
-
-def Teste(fonte, tipo):
-    with open(fonte + today +'/' + tipo + '.csv', encoding="utf8") as d1:
-        with open(fonte + today + '/dataset.csv', encoding="utf8") as d2:
-            same = set(d1).intersection(d2)
-    same.discard('\n')
-    with open(fonte + today + 'teste.csv')
-
-Teste(dTrading,'polaritySentiLexPre')
+        # print('Lex Neutros: ', lexNeu)    
