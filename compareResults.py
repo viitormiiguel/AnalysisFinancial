@@ -9,19 +9,7 @@ today = now.strftime("%Y-%m-%d")
 
 dTrading = 'C:/Users/vitor/Documents/GetDataset/TradingView/'
 
-def RunCompare(fonte, tipo):
-    # countPos = 0 
-    # countNeg = 0
-    # countNeu = 0
-    # lexPos = 0
-    # lexNeg = 0
-    # lexNeu = 0
-    # ARQUIVO GERADO PELO LEXICO
-    with open(fonte + today +'/' + tipo + '.csv', encoding="utf8") as csvfile:
-        reader = csv.reader(csvfile)
-        next(reader)
-        dados1 = [r for r in reader]
-        # print(dados1[1][0])
+def RunCompare(fonte):
     # DATASET COLETADO JA ROTULADO
     with open(fonte + today + '/dataset.csv', encoding="utf8") as datacompare:
         reader = csv.reader(datacompare)
@@ -33,52 +21,85 @@ def RunCompare(fonte, tipo):
             for v1 in dados2:
                 try:
                     if v1[1]:
+                        if v1[1] == 'Viés de alta':
+                            v1[1] = v1[1].replace('Viés de alta','Positivo')
+                        if v1[1] == 'Viés de baixa':
+                            v1[1] = v1[1].replace('Viés de baixa','Negativo')
+                        if v1[1] == 'Educação':
+                            v1[1] = v1[1].replace('Educação','Neutro')
                         new_file.writerow([v1[2], v1[1]])
                 except IndexError:
-                    x = 'null'            
-            
+                    _ = 'null'            
 
-RunCompare(dTrading, 'polaritySentiLexPre')
+RunCompare(dTrading)
 
-# def Teste(fonte, tipo):
-#     with open(fonte + today +'/' + tipo + '.csv', encoding="utf8") as d1:
-#         with open(fonte + today + '/dataset.csv', encoding="utf8") as d2:
-#             same = set(d1).intersection(d2)
-#     same.discard('\n')
-#     with open(fonte + today + 'teste.csv')
+def Comparation(a1, a2):
+    f1 = open(a1, encoding="utf8")
+    f2 = open(a2, encoding="utf8")
 
-# Teste(dTrading,'polaritySentiLexPre')
+    f1_line = f1.readline()
+    f2_line = f2.readline()
+    line_no = 1
 
-# for valores in dados2:
-        #     try:
-        #         if valores[1]:
-        #             x = 'Teste'
-        #             if valores[1] == 'Viés de alta':
-        #                 valores[1] = valores[1].replace('Viés de alta','Positivo')
-        #                 countPos += 1
-        #             if valores[1] == 'Viés de baixa':
-        #                 valores[1] = valores[1].replace('Viés de baixa','Negativo')
-        #                 countNeg += 1
-        #             if valores[1] == 'Educação':
-        #                 valores[1] = valores[1].replace('Educação','Neutro')
-        #                 countNeu += 1
-        #     except IndexError:
-        #         x = 'null'
-        # for valores2 in dados1:
-        #     try:
-        #         if valores2[1]:
-        #             x = 'Teste' 
-        #             if 'Positivo' in valores2[1]:
-        #                 lexPos += 1
-        #             if 'Negativo' in valores2[1]:
-        #                 lexNeg += 1
-        #             if 'Neutro' in valores2[1]:
-        #                 lexNeu += 1
-        #     except IndexError:
-        #         x = 'null'
-        # print("Positivos: ", countPos)
-        # print("Negativos: ", countNeg)
-        # print("Neutros: ", countNeu)
-        # print("Lex Positivos: ", lexPos)
-        # print('Lex Negativos: ', lexNeg)
-        # print('Lex Neutros: ', lexNeu)    
+    pospos = 0
+    posneg = 0
+    posneu = 0
+    negneg = 0
+    negpos = 0
+    negneu = 0
+    neuneu = 0
+    neuneg = 0
+    neupos = 0
+
+    while f1_line != '' or f2_line != '':
+        f1_line = f1_line.rstrip()
+        f2_line = f2_line.rstrip()
+        
+        if f1_line != f2_line:
+            if 'Negativo' in f2_line:
+                if 'Negativo' in f1_line:
+                    negneg += 1
+                if 'Positivo' in f1_line:
+                    negpos += 1
+                if 'Neutro' in f1_line:
+                    negneu += 1
+            if 'Positivo' in f2_line:
+                if 'Negativo' in f1_line:
+                    posneg += 1
+                if 'Positivo' in f1_line:
+                    pospos += 1
+                if 'Neutro' in f1_line:
+                    posneu += 1
+            if 'Neutro' in f2_line:
+                if 'Negativo' in f1_line:
+                    neuneg += 1
+                if 'Positivo' in f1_line:
+                    neupos += 1
+                if 'Neutro' in f1_line:
+                    neuneu += 1
+
+        #Read the next line from the file
+        f1_line = f1.readline()
+        f2_line = f2.readline()
+
+        #Increment line counter
+        line_no += 1
+    
+    print('Positivo pos: ', pospos)
+    print('Positivo neu: ', posneu)
+    print('Positivo neg: ', posneg)
+
+    print('Neutro pos: ', neupos)
+    print('Neutro neu: ', neuneu)
+    print('Neutro neg: ', neuneg)
+
+    print('Negativo pos: ', negpos)
+    print('Negativo neu: ', negneu)
+    print('Negativo neg: ', negneg)
+
+    f1.close()
+    f2.close()
+
+# Comparation(dTrading + today + '/compare.csv', dTrading + today + '/polaritySentiLexPre.csv')
+# Comparation(dTrading + today + '/compare.csv', dTrading + today + '/polarityOpLexiconPre.csv')
+Comparation(dTrading + today + '/compare.csv', dTrading + today + '/polarityLiwcPre.csv')
