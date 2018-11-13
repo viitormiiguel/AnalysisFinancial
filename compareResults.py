@@ -1,8 +1,6 @@
 import csv
-import re 
-import importlib 
+import re  
 import datetime 
-import imp
 
 now = datetime.datetime.now()
 today = now.strftime("%Y-%m-%d")
@@ -11,6 +9,7 @@ dTrading = 'C:/Users/vitor/Documents/GetDataset/TradingView/'
 
 def RunCompare(fonte):
     # DATASET COLETADO JA ROTULADO
+    neutro = 0
     with open(fonte + today + '/dataset.csv', encoding="utf8") as datacompare:
         reader = csv.reader(datacompare)
         next(reader)
@@ -27,9 +26,11 @@ def RunCompare(fonte):
                             v1[1] = v1[1].replace('Viés de baixa','Negativo')
                         if v1[1] == 'Educação':
                             v1[1] = v1[1].replace('Educação','Neutro')
+                            neutro += 1
                         new_file.writerow([v1[2], v1[1]])
                 except IndexError:
-                    _ = 'null'            
+                    _ = 'null'
+        print("Neutros ", neutro)
 
 RunCompare(dTrading)
 
@@ -100,6 +101,6 @@ def Comparation(a1, a2):
     f1.close()
     f2.close()
 
-# Comparation(dTrading + today + '/compare.csv', dTrading + today + '/polaritySentiLexPre.csv')
+Comparation(dTrading + today + '/compare.csv', dTrading + today + '/polaritySentiLexPre.csv')
 # Comparation(dTrading + today + '/compare.csv', dTrading + today + '/polarityOpLexiconPre.csv')
-Comparation(dTrading + today + '/compare.csv', dTrading + today + '/polarityLiwcPre.csv')
+# Comparation(dTrading + today + '/compare.csv', dTrading + today + '/polarityLiwcPre.csv')

@@ -1,6 +1,4 @@
 import sys 
-import importlib
-import imp
 import codecs
 import nltk
 from nltk.corpus import stopwords
@@ -49,13 +47,21 @@ def idf(word, bloblist):
 def tfidf(word, blob, bloblist):
     return tf(word, blob) * idf (word, bloblist)
 
-def teste(b1):
-    for i, blob in enumerate(b1):
+def algo(b, t):
+    f1 = open(dTrading + today + '/lexicon.txt', 'a+', encoding="utf8")
+    for i, blob in enumerate(b):
         print("Top words in document {}".format(i + 1))
-        scores = {word: tfidf(word, blob, b1) for word in blob.words}
+        scores = {word: tfidf(word, blob, b) for word in blob.words}
         sorted_words = sorted(scores.items(), key=lambda x: x[1], reverse=True)
-        for word, score in sorted_words[:40]:
+        for word, score in sorted_words[:100]:
             print("\tWord: {}, TF-IDF: {}".format(word, round(score, 5)))
+            if t == 'n':
+                f1.write(word + '\t\t' + '-1' + '\n')
+            if t == 'p':
+                f1.write(word + '\t\t' + '1' + '\n')
+            if t == 'nt':
+                f1.write(word + '\t\t' + '0' + '\n')
+    f1.close()
 
 def divideDataset(fonte):
     bl1 = []
@@ -87,6 +93,8 @@ def divideDataset(fonte):
                     bl3 = [t3]
             except IndexError:
                 _ = 'null'
-        teste(bl2)
+        algo(bl2, 'n')
+        algo(bl1, 'p')
+        algo(bl3, 'nt')
 
 divideDataset(dTrading)

@@ -1,6 +1,4 @@
 import sys 
-import importlib
-import imp
 import codecs
 import nltk
 from nltk.corpus import stopwords
@@ -78,7 +76,7 @@ def main(filename, topwords, tipo):
     txt = openfile(filename)
     words = txt.split(' ')
     bins = getwordbins(words)
-    f1 = open(dTrading + today + '/lexicon.txt', 'a+', encoding="utf8")
+    f1 = open(dTrading + today + '/lexicon-base.txt', 'a+', encoding="utf8")
     for key, value in bins.most_common(topwords):
         # print(key,value)
         # print(key)
@@ -94,5 +92,5 @@ def main(filename, topwords, tipo):
  
 # main(dTrading + today + '/negative.txt', 500, 'n')
 # main(dTrading + today + '/positive.txt', 500, 'p')
-# main(dTrading + today + '/neutral.txt', 500, 'nt')
+main(dTrading + today + '/neutral.txt', 500, 'nt')
 

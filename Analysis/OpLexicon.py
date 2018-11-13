@@ -2,8 +2,6 @@ import nltk
 import csv 
 import re 
 import datetime 
-import importlib
-import imp
 
 now = datetime.datetime.now()
 today = now.strftime("%Y-%m-%d")

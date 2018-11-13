@@ -2,8 +2,6 @@ import nltk
 import csv 
 import re 
 import datetime 
-import importlib
-import imp
 
 now = datetime.datetime.now()
 today = now.strftime("%Y-%m-%d")
@@ -69,6 +67,7 @@ def RunAnalysis(fonte, tipo):
         reader = csv.reader(csvfile)
         next(reader)
         dataInfo = [r for r in reader]
+        print(fonte + ':', len(dataInfo))
     with open(fonte + today +'/' + tipo + '.csv', mode='w', encoding="utf8") as employee_file:
         employee_writer = csv.writer(employee_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)    
         for lista2 in dataInfo:
