@@ -26,11 +26,16 @@ def RemoveStopWords(instancia):
 def preProcess(txt):
     # Conversao para minusculos
     frase = txt.lower()
+    # Remover urls
+    frase = re.sub(r"http\S+", "", frase)
+    # Remoção $ e %
+    frase = re.sub('[R$%]','',frase)
     # Remoção de numeros
     frase = re.sub('[-10-9]','', frase)
     # Remoçao de pontuação
     frase = re.sub(r'[-./?!,":;()\']','',frase)
     # Remoção de stopwords
+    frase = re.sub('[➖]','',frase)
     texto = RemoveStopWords(frase)
     return texto
 
@@ -98,3 +103,4 @@ def divideDataset(fonte):
         algo(bl3, 'nt')
 
 divideDataset(dTrading)
+

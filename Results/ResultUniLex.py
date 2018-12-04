@@ -13,8 +13,8 @@ dInvesting = 'C:/Users/vitor/Documents/GetDataset/Investing.com/'
 dTrading = 'C:/Users/vitor/Documents/GetDataset/TradingView/'
 
 # Resultados Investing.com
-# r_investing = open(dInvesting + today +'/polarityUniLexPre.csv', 'r', encoding='utf8')
-r_investing = open(dInvesting + today +'/polarityUniLexNo.csv', 'r', encoding='utf8')
+r_investing = open(dInvesting + today +'/polarityUniLexPre.csv', 'r', encoding='utf8')
+# r_investing = open(dInvesting + today +'/polarityUniLexNo.csv', 'r', encoding='utf8')
 posInv = 0 
 neuInv = 0 
 negInv = 0
@@ -30,8 +30,8 @@ print('Investing Neu ', neuInv)
 print('Investing Neg ', negInv)
 
 # Resultados InfoMoney
-# r_infomoney = open(dInfoMoney + today +'/polarityUniLexPre.csv', 'r', encoding='utf8')
-r_infomoney = open(dInfoMoney + today +'/polarityUniLexNo.csv', 'r', encoding='utf8')
+r_infomoney = open(dInfoMoney + today +'/polarityUniLexPre.csv', 'r', encoding='utf8')
+# r_infomoney = open(dInfoMoney + today +'/polarityUniLexNo.csv', 'r', encoding='utf8')
 posInf = 0
 neuInf = 0 
 negInf = 0
@@ -47,8 +47,8 @@ print('InfoMoney Neu ', neuInf)
 print('InfoMoney Neg ', negInf)
 
 # Resultados TradingView
-# r_tradingview = open(dTrading + today +'/polarityUniLexPre.csv', 'r', encoding='utf8')
-r_tradingview = open(dTrading + today +'/polarityUniLexNo.csv', 'r', encoding='utf8')
+r_tradingview = open(dTrading + today +'/polarityUniLexPre.csv', 'r', encoding='utf8')
+# r_tradingview = open(dTrading + today +'/polarityUniLexNo.csv', 'r', encoding='utf8')
 posTrd = 0
 neuTrd = 0 
 negTrd = 0

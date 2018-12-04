@@ -63,35 +63,35 @@ print('TradingView Pos ', posTrd)
 print('TradingView Neu ', neuTrd)
 print('TradingView Neg ', negTrd)
 
-# raw_data = {'Fonte de Dados': ['Investing.com', 'InfoMoney', 'TradingView'],
-#         'Pos': [posInv, posInf, posTrd],
-#         'Neu': [neuInv, neuInf, neuTrd],
-#         'Neg': [negInv, negInf, negTrd]}
-# df = pd.DataFrame(raw_data, columns = ['Fonte de Dados', 'Pos', 'Neu', 'Neg'])
-# df
+raw_data = {'Fonte de Dados': ['Investing.com', 'InfoMoney', 'TradingView'],
+        'Pos': [posInv, posInf, posTrd],
+        'Neu': [neuInv, neuInf, neuTrd],
+        'Neg': [negInv, negInf, negTrd]}
+df = pd.DataFrame(raw_data, columns = ['Fonte de Dados', 'Pos', 'Neu', 'Neg'])
+df
 
-# # Setting the positions and width for the bars
-# pos = list(range(len(df['Pos']))) 
-# width = 0.25 
-# fig, ax = plt.subplots(figsize=(10,5))
+# Setting the positions and width for the bars
+pos = list(range(len(df['Pos']))) 
+width = 0.25 
+fig, ax = plt.subplots(figsize=(10,5))
 
-# # Create a bar with pre_score data, # in position pos,
-# plt.bar(pos, df['Pos'], width, alpha=0.5, color='#EE3224', label=df['Fonte de Dados'][0]) 
+# Create a bar with pre_score data, # in position pos,
+plt.bar(pos, df['Pos'], width, alpha=0.5, color='#EE3224', label=df['Fonte de Dados'][0]) 
 
-# # Create a bar with mid_score data, # in position pos + some width buffer,
-# plt.bar([p + width for p in pos], df['Neu'], width, alpha=0.5, color='#F78F1E', label=df['Fonte de Dados'][1]) 
+# Create a bar with mid_score data, # in position pos + some width buffer,
+plt.bar([p + width for p in pos], df['Neu'], width, alpha=0.5, color='#F78F1E', label=df['Fonte de Dados'][1]) 
 
-# # Create a bar with post_score data, # in position pos + some width buffer,
-# plt.bar([p + width*2 for p in pos], df['Neg'], width, alpha=0.5, color='#FFC222', label=df['Fonte de Dados'][2]) 
+# Create a bar with post_score data, # in position pos + some width buffer,
+plt.bar([p + width*2 for p in pos], df['Neg'], width, alpha=0.5, color='#FFC222', label=df['Fonte de Dados'][2]) 
 
-# ax.set_title("OpLexicon sem Pré-Processamento")
-# ax.set_ylabel('N° de Textos')
-# ax.set_xticks([p + 1 * width for p in pos])
-# ax.set_xticklabels(df['Fonte de Dados'])
+ax.set_title("OpLexicon sem Pré-Processamento")
+ax.set_ylabel('N° de Textos')
+ax.set_xticks([p + 1 * width for p in pos])
+ax.set_xticklabels(df['Fonte de Dados'])
 
-# plt.xlim(min(pos)-width, max(pos)+width*4)
-# plt.ylim([0, max(df['Pos'] + df['Neu'] + df['Neg'])] )
+plt.xlim(min(pos)-width, max(pos)+width*4)
+plt.ylim([0, max(df['Pos'] + df['Neu'] + df['Neg'])] )
 
-# plt.legend(['Positivo', 'Neutro', 'Negativo'], loc='upper left')
-# plt.grid()
-# plt.show()
+plt.legend(['Positivo', 'Neutro', 'Negativo'], loc='upper left')
+plt.grid()
+plt.show()

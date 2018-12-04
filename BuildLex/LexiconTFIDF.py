@@ -23,11 +23,16 @@ def RemoveStopWords(instancia):
 def preProcess(txt):
     # Conversao para minusculos
     frase = txt.lower()
+    # Remover urls
+    frase = re.sub(r"http\S+", "", frase)
+    # Remoção $ e %
+    frase = re.sub('[R$%]','',frase)
     # Remoção de numeros
     frase = re.sub('[-10-9]','', frase)
     # Remoçao de pontuação
     frase = re.sub(r'[-./?!,":;()\']','',frase)
     # Remoção de stopwords
+    frase = re.sub('[➖]','',frase)
     texto = RemoveStopWords(frase)
     return texto
 
@@ -58,7 +63,7 @@ def count_words(sent):
 def create_freq_dict(sents):
     i = 0
     freqDict_list = []
-    f1 = open(dTrading + today + '/lexicon.txt', 'a+', encoding="utf8")
+    f1 = open(dTrading + today + '/lexicon-tf-idf.txt', 'a+', encoding="utf8")
     teste = []
     for sent in sents:
         i += 1
@@ -137,7 +142,7 @@ def divideDataset(fonte):
                     doc3 += "\n" + d3
             except IndexError:
                 _ = 'null'
-        return doc1
+        return doc2
 
 texto = divideDataset(dTrading)
 
