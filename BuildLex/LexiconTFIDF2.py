@@ -63,7 +63,7 @@ def count_words(sent):
 def create_freq_dict(sents):
     i = 0
     freqDict_list = []
-    f1 = open(dTrading + today + '/lexicon-tf-idf.txt', 'a+', encoding="utf8")
+    f1 = open(dTrading + today + '/lexicon-tf-idf-2.txt', 'a+', encoding="utf8")
     teste = []
     for sent in sents:
         i += 1
@@ -83,8 +83,8 @@ def create_freq_dict(sents):
     
     for new in teste:
         # f1.write(new + '\t\t' + '-1'+ '\n')
-        f1.write(new + '\t\t' + '0'+ '\n')
-        # f1.write(new + '\t\t' + '1'+ '\n')
+        # f1.write(new + '\t\t' + '0'+ '\n')
+        f1.write(new + '\t\t' + '1'+ '\n')
     f1.close()
     return freqDict_list
 

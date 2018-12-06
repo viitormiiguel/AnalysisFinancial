@@ -1,6 +1,4 @@
 import sys 
-import imp
-import importlib
 import codecs
 import nltk
 from nltk.corpus import stopwords
@@ -15,19 +13,18 @@ today = now.strftime("%Y-%m-%d")
 
 dTrading    = 'C:/Users/vitor/Documents/GetDataset/TradingView/'
 sentilex    = open("Lexicon/SentiLex/SentiLex-lem-PT01.txt", 'r', encoding="utf8")
-lexico      =  open(dTrading + today + '/lexicon.txt', 'r', encoding="utf8") 
+lexico      = open(dTrading + today + '/lexicon-tf-idf-1.txt', 'r', encoding="utf8") 
 
 dic_palavra = {}
-for i in sentilex.readlines():
-    pos_ponto = i.find('.')
-    palavra = (i[:pos_ponto])
-    pol_pos = i.find('POL')
-    polaridade = (i[pol_pos+4:pol_pos+6]).replace(';','')
-    dic_palavra[palavra] = polaridade    
 
 for line in lexico.readlines():
     pos_spc = line.find('\t\t')
     termo = (line[:pos_spc])
-    if termo in sentilex.readlines():
-        print(termo)
-
+    print(termo)
+    for i in sentilex.readlines():
+        pos_ponto = i.find('.')
+        palavra = (i[:pos_ponto])
+        pol_pos = i.find('POL')
+        polaridade = (i[pol_pos+4:pol_pos+6]).replace(';','')
+        dic_palavra[palavra] = polaridade        
+        print("TERMO: ", termo, " LEXICO: ", palavra)

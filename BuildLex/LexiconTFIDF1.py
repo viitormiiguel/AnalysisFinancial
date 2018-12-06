@@ -53,7 +53,7 @@ def tfidf(word, blob, bloblist):
     return tf(word, blob) * idf (word, bloblist)
 
 def algo(b, t):
-    f1 = open(dTrading + today + '/lexicon.txt', 'a+', encoding="utf8")
+    f1 = open(dTrading + today + '/lexicon-tf-idf-1.txt', 'a+', encoding="utf8")
     for i, blob in enumerate(b):
         print("Top words in document {}".format(i + 1))
         scores = {word: tfidf(word, blob, b) for word in blob.words}
