@@ -7,8 +7,6 @@ import csv
 import datetime
 from collections import Counter
 import re
-import importlib
-import imp
 
 now = datetime.datetime.now()
 today = now.strftime("%Y-%m-%d")
@@ -39,9 +37,15 @@ def AdjLexico(base, arquivo):
             dic_palavra[palavra] = polaridade
             if termo == palavra:
                 # print("TERMO: ", termo, " POSTAGGING: ", tag, " POL: ", pol)
-                f1.write(termo + ';' + 'POS=' + tag + ';' + 'POL=' + pol)    
+                f1.write(termo + ';' + 'POS=' + tag + ';' + 'POL=' + pol)
+    f1.close()
+
+def AdjLexico2(base, arquivo):
+    lexico      = open(dTrading + today + base, 'r', encoding="utf8")
+    lexico      = lexico.readlines()
+    f1 = open(dTrading + today + arquivo, 'a+', encoding="utf8")
     for line in lexico:
-        pos_spc = line.find('\t\t')
+        pos_spc = line.find(',')
         termo = (line[:pos_spc])
         pol = (line[pos_spc:])
         for i in oplexicon:
@@ -51,8 +55,36 @@ def AdjLexico(base, arquivo):
             tag = (i[pos_tag+1:pos_tag+4])
             if termo == palavra:
                 # print("TERMO: ", termo, " POSTAGGING: ", tag, " POL: ", pol)
-                f1.write(termo + ';' + 'POS=' + tag + ';' + 'POL=' + pol)    
+                f1.write(termo + ';' + 'POS=' + tag + ';' + 'POL=' + pol)
     f1.close()
 
-AdjLexico('/lexicon-tf-idf-1.txt', '/lexicon-sent-1.txt')
-AdjLexico('/lexicon-base.txt', '/lexicon-sent-2.txt')
+
+# AdjLexico('/lexicon-tf-idf-1.txt', '/lexicon-sent-tf-sentilex.txt')
+# AdjLexico('/lexicon-base.txt', '/lexicon-sent-base-sentilex.txt')
+
+# AdjLexico2('/lexicon-tf-idf-1.txt', '/lexicon-sent-tf-oplexicon.txt')
+# AdjLexico2('/lexicon-base.txt', '/lexicon-sent-base-oplexicon.txt')
+
+def Stem():
+    stemmer = nltk.stem.RSLPStemmer()
+    lex     = open(dTrading + today + '/lexicon-sent-tf-oplexicon.txt', 'r', encoding="utf8")
+    lex     = lex.readlines()
+    f1 = open(dTrading + today + '/lexicon_complete.txt', 'a+', encoding="utf8")
+    for line in lex:
+        pos_ponto = line.find(';')
+        palavra = (line[:pos_ponto])
+        pos_tag = line.find('POS')
+        tag = (line[pos_tag+4:pos_tag+7])
+        pos_pol = line.find('POL=')
+        pol = (line[pos_pol+4:pos_pol+7])
+        pol = pol.replace(',','')
+        s = stemmer.stem(palavra)
+        for i in sentilex:
+            pos_ponto = i.find('.')
+            p = (i[:pos_ponto])
+            if s in p:
+                f1.write(palavra + ';' + 'POS=' + tag + ';' + 'POL=' + pol)
+                f1.write(s + ';' + 'POS=' + tag + ';' + 'POL=' + pol)
+    f1.close()
+
+Stem()

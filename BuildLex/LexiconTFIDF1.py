@@ -61,11 +61,11 @@ def algo(b, t):
         for word, score in sorted_words[:100]:
             print("\tWord: {}, TF-IDF: {}".format(word, round(score, 5)))
             if t == 'n':
-                f1.write(word + '\t\t' + '-1' + '\n')
+                f1.write(word + ',' + '-1' + '\n')
             if t == 'p':
-                f1.write(word + '\t\t' + '1' + '\n')
+                f1.write(word + ',' + '1' + '\n')
             if t == 'nt':
-                f1.write(word + '\t\t' + '0' + '\n')
+                f1.write(word + ',' + '0' + '\n')
     f1.close()
 
 def divideDataset(fonte):
