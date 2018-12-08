@@ -58,13 +58,6 @@ def AdjLexico2(base, arquivo):
                 f1.write(termo + ';' + 'POS=' + tag + ';' + 'POL=' + pol)
     f1.close()
 
-
-# AdjLexico('/lexicon-tf-idf-1.txt', '/lexicon-sent-tf-sentilex.txt')
-# AdjLexico('/lexicon-base.txt', '/lexicon-sent-base-sentilex.txt')
-
-# AdjLexico2('/lexicon-tf-idf-1.txt', '/lexicon-sent-tf-oplexicon.txt')
-# AdjLexico2('/lexicon-base.txt', '/lexicon-sent-base-oplexicon.txt')
-
 def Stem():
     stemmer = nltk.stem.RSLPStemmer()
     lex     = open(dTrading + today + '/lexicon-sent-tf-oplexicon.txt', 'r', encoding="utf8")
@@ -79,12 +72,36 @@ def Stem():
         pol = (line[pos_pol+4:pos_pol+7])
         pol = pol.replace(',','')
         s = stemmer.stem(palavra)
+        f1.write(palavra + ';' + 'POS=' + tag + ';' + 'POL=' + pol + '\n')
         for i in sentilex:
             pos_ponto = i.find('.')
             p = (i[:pos_ponto])
-            if s in p:
-                f1.write(palavra + ';' + 'POS=' + tag + ';' + 'POL=' + pol)
-                f1.write(s + ';' + 'POS=' + tag + ';' + 'POL=' + pol)
+            if re.match(r'^'+s, p):
+                f1.write(p + ';' + 'POS=' + tag + ';' + 'POL=' + pol + '\n')
     f1.close()
 
+def adjustFile():
+    with open(dTrading + today + '/lexicon_complete.txt', 'r+', encoding="utf8") as fh:
+        f1 = open(dTrading + today + '/lexicon_final.txt', 'a+', encoding='utf8')
+        for line in fh:
+            if line.strip():
+                r = line.strip() + "\n"
+                f1.write(str(r))
+        f1.close()
+
+
+print("Lexicon match...")
+
+AdjLexico('/lexicon-tf-idf-1.txt', '/lexicon-sent-tf-sentilex.txt')
+AdjLexico('/lexicon-base.txt', '/lexicon-sent-base-sentilex.txt')
+
+AdjLexico2('/lexicon-tf-idf-1.txt', '/lexicon-sent-tf-oplexicon.txt')
+AdjLexico2('/lexicon-base.txt', '/lexicon-sent-base-oplexicon.txt')
+
+print("Lexicon comparing...")
+
 Stem()
+adjustFile()
+
+print("Lexicon Done!")
+
