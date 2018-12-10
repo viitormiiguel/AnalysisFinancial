@@ -19,26 +19,26 @@ oplexicon   = oplexicon.readlines()
 
 dic_palavra = {}
 
-def AdjLexico(base, arquivo):
-    lexico      = open(dTrading + today + base, 'r', encoding="utf8")
-    lexico      = lexico.readlines()
-    f1 = open(dTrading + today + arquivo, 'a+', encoding="utf8")
-    for line in lexico:
-        pos_spc = line.find('\t\t')
-        termo = (line[:pos_spc])
-        pol = (line[pos_spc:])
-        for i in sentilex:
-            pos_ponto = i.find('.')
-            palavra = (i[:pos_ponto])
-            pol_pos = i.find('POL')
-            polaridade = (i[pol_pos+4:pol_pos+6]).replace(';','')
-            pos_tag = i.find('PoS')
-            tag = (i[pos_tag+4:pos_tag+7])
-            dic_palavra[palavra] = polaridade
-            if termo == palavra:
-                # print("TERMO: ", termo, " POSTAGGING: ", tag, " POL: ", pol)
-                f1.write(termo + ';' + 'POS=' + tag + ';' + 'POL=' + pol)
-    f1.close()
+# def AdjLexico(base, arquivo):
+#     lexico      = open(dTrading + today + base, 'r', encoding="utf8")
+#     lexico      = lexico.readlines()
+#     f1 = open(dTrading + today + arquivo, 'a+', encoding="utf8")
+#     for line in lexico:
+#         pos_spc = line.find('\t\t')
+#         termo = (line[:pos_spc])
+#         pol = (line[pos_spc:])
+#         for i in sentilex:
+#             pos_ponto = i.find('.')
+#             palavra = (i[:pos_ponto])
+#             pol_pos = i.find('POL')
+#             polaridade = (i[pol_pos+4:pol_pos+6]).replace(';','')
+#             pos_tag = i.find('PoS')
+#             tag = (i[pos_tag+4:pos_tag+7])
+#             dic_palavra[palavra] = polaridade
+#             if termo == palavra:
+#                 # print("TERMO: ", termo, " POSTAGGING: ", tag, " POL: ", pol)
+#                 f1.write(termo + ';' + 'POS=' + tag + ';' + 'POL=' + pol)
+#     f1.close()
 
 def AdjLexico2(base, arquivo):
     lexico      = open(dTrading + today + base, 'r', encoding="utf8")
@@ -72,28 +72,30 @@ def Stem():
         pol = (line[pos_pol+4:pos_pol+7])
         pol = pol.replace(',','')
         s = stemmer.stem(palavra)
-        f1.write(palavra + ';' + 'POS=' + tag + ';' + 'POL=' + pol + '\n')
+        f1.write(palavra + '.' + 'POS=' + tag + ';' + 'POL=' + pol + '\n')
         for i in sentilex:
             pos_ponto = i.find('.')
             p = (i[:pos_ponto])
             if re.match(r'^'+s, p):
-                f1.write(p + ';' + 'POS=' + tag + ';' + 'POL=' + pol + '\n')
+                f1.write(p + '.' + 'POS=' + tag + ';' + 'POL=' + pol + '\n')
     f1.close()
 
 def adjustFile():
     with open(dTrading + today + '/lexicon_complete.txt', 'r+', encoding="utf8") as fh:
-        f1 = open(dTrading + today + '/lexicon_final.txt', 'a+', encoding='utf8')
+        f1 = open('Lexicon/Finance/lexicon_final.txt', 'a+', encoding='utf8')
+        f2 = open(dTrading + today + '/lexicon_final.txt', 'a+', encoding='utf8')
         for line in fh:
             if line.strip():
                 r = line.strip() + "\n"
                 f1.write(str(r))
+                f2.write(str(r))
         f1.close()
-
+        f2.close()
 
 print("Lexicon match...")
 
-AdjLexico('/lexicon-tf-idf-1.txt', '/lexicon-sent-tf-sentilex.txt')
-AdjLexico('/lexicon-base.txt', '/lexicon-sent-base-sentilex.txt')
+# AdjLexico('/lexicon-tf-idf-1.txt', '/lexicon-sent-tf-sentilex.txt')
+# AdjLexico('/lexicon-base.txt', '/lexicon-sent-base-sentilex.txt')
 
 AdjLexico2('/lexicon-tf-idf-1.txt', '/lexicon-sent-tf-oplexicon.txt')
 AdjLexico2('/lexicon-base.txt', '/lexicon-sent-base-oplexicon.txt')
