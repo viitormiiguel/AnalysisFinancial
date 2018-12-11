@@ -6,20 +6,17 @@ import datetime
 now = datetime.datetime.now()
 today = now.strftime("%Y-%m-%d")
 
-dInfoMoney = 'C:/Users/vitor/Documents/GetDataset/Infomoney/'
-dInvesting = 'C:/Users/vitor/Documents/GetDataset/Investing.com/'
-dTrading = 'C:/Users/vitor/Documents/GetDataset/TradingView/'
-
 stemmer = nltk.stem.RSLPStemmer()
 
-finance = open(dTrading + today + "/lexicon-tf-idf-1.txt", 'r', encoding="utf8")
+sentilex = open("Lexicon/SentiLex/SentiLex-lem-PT01.txt", 'r', encoding="utf8")
 
 dic_palavra = {}
-for i in finance.readlines():
-    pos_ponto = i.find(',')
+for i in sentilex.readlines():
+    pos_ponto = i.find('.')
     palavra = (i[:pos_ponto])
-    pol_pos = (i[pos_ponto+1:pos_ponto+4])
-    dic_palavra[palavra] = pos_ponto
+    pol_pos = i.find('POL')
+    polaridade = (i[pol_pos+4:pol_pos+6]).replace(';','')
+    dic_palavra[palavra] = polaridade
 
 def RemoveStopWords(instancia):
     instancia  = instancia.lower()
@@ -61,6 +58,10 @@ def Score_sentimento_pre(frase):
     else:
         return 'Negativo, Score:{}'.format(score)
 
+dInfoMoney = 'C:/Users/vitor/Documents/GetDataset/Infomoney/'
+dInvesting = 'C:/Users/vitor/Documents/GetDataset/Investing.com/'
+dTrading = 'C:/Users/vitor/Documents/GetDataset/TradingView/'
+
 def RunAnalysis(fonte, tipo):
     with open(fonte + today +'/dataset.csv', encoding="utf8") as csvfile:
         reader = csv.reader(csvfile)
@@ -70,9 +71,8 @@ def RunAnalysis(fonte, tipo):
         employee_writer = csv.writer(employee_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)    
         for lista2 in dataInfo:
             try:
-                # Contar apenas textos ja rotulados
                 if not lista2[1]:
-                    if tipo == 'polarityFinanceNo':
+                    if tipo == 'LexiconTradingSentilex':
                         x = Score_sentimento_pre(lista2[2])
                         x = str(x)
                     else:
@@ -82,10 +82,4 @@ def RunAnalysis(fonte, tipo):
             except IndexError:
                 x = 'null'
 
-# RunAnalysis(dInfoMoney, 'polarityFinanceNo')
-# RunAnalysis(dInvesting, 'polarityFinanceNo')
-# RunAnalysis(dTrading, 'polarityFinanceNo')
-
-# RunAnalysis(dInfoMoney, 'polarityFinancePre')
-# RunAnalysis(dInvesting, 'polarityFinancePre')
-RunAnalysis(dTrading, 'polarityFinancePre')
+RunAnalysis(dTrading, 'LexiconTradingSentilex')
