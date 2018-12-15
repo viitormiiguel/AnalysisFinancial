@@ -30,7 +30,7 @@ def RunCompare(fonte):
                         new_file.writerow([v1[2], v1[1]])
                 except IndexError:
                     _ = 'null'
-        print("Neutros ", neutro)
+        # print("Neutros ", neutro)
 
 RunCompare(dTrading)
 
@@ -101,6 +101,7 @@ def Comparation(a1, a2):
     f1.close()
     f2.close()
 
-Comparation(dTrading + today + '/compare.csv', dTrading + today + '/polaritySentiLexPre.csv')
+# Comparation(dTrading + today + '/compare.csv', dTrading + today + '/polarityUnilexPre.csv')
+Comparation(dTrading + today + '/compare.csv', dTrading + today + '/LexiconTradingFinance.csv')
 # Comparation(dTrading + today + '/compare.csv', dTrading + today + '/polarityOpLexiconPre.csv')
 # Comparation(dTrading + today + '/compare.csv', dTrading + today + '/polarityLiwcPre.csv')

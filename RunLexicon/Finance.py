@@ -71,7 +71,7 @@ def RunAnalysis(fonte, tipo):
         employee_writer = csv.writer(employee_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)    
         for lista2 in dataInfo:
             try:
-                if not lista2[1]:
+                if lista2[1]:
                     if tipo == 'LexiconTradingFinance':
                         x = Score_sentimento_pre(lista2[2])
                         x = str(x)
