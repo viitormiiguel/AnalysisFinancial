@@ -47,7 +47,7 @@ def AdjLexico2(base, arquivo):
     for line in lexico:
         pos_spc = line.find(',')
         termo = (line[:pos_spc])
-        pol = (line[pos_spc:])
+        pol = (line[pos_spc+4:pos_spc+7])
         for i in oplexicon:
             pos_ponto = i.find(',')
             palavra = (i[:pos_ponto])

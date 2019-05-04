@@ -95,6 +95,6 @@ def main(filename, topwords, tipo):
     f1.close()
     print("Lexicon created!")
  
-main(dTrading + today + '/negative.txt', 500, 'n')
+# main(dTrading + today + '/negative.txt', 500, 'n')
 # main(dTrading + today + '/neutral.txt', 500, 'nt')
-# main(dTrading + today + '/positive.txt', 500, 'p')
+main(dTrading + today + '/positive.txt', 500, 'p')
