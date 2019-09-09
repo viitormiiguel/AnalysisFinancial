@@ -8,7 +8,7 @@ today = now.strftime("%Y-%m-%d")
 
 stemmer = nltk.stem.RSLPStemmer()
 
-sentilex = open("Lexicon/SentiLex/SentiLex-lem-PT01.txt", 'r', encoding="utf8")
+sentilex = open("C:/Users/vitor/Documents/PythonProjects/AnalysisFinancial/Lexicon/SentiLex/SentiLex-lem-PT01.txt", 'r')
 
 dic_palavra = {}
 for i in sentilex.readlines():
@@ -62,14 +62,14 @@ dInfoMoney = 'C:/Users/vitor/Documents/GetDataset/Infomoney/'
 dInvesting = 'C:/Users/vitor/Documents/GetDataset/Investing.com/'
 dTrading = 'C:/Users/vitor/Documents/GetDataset/TradingView/'
 
-def RunAnalysis(fonte, tipo):
-    with open(fonte + today +'/dataset.csv', encoding="utf8") as csvfile:
+def RunAnalysis(fonte, tipo, acao):
+    with open(fonte + today +'/' + acao + '.csv') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
         dataInfo = [r for r in reader]
         print(fonte + ':', len(dataInfo))
-    with open(fonte + today +'/' + tipo + '.csv', mode='w', encoding="utf8") as employee_file:
-        employee_writer = csv.writer(employee_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)    
+    with open(fonte + today +'/' + tipo + '_' + acao + '.csv', mode='w') as employee_file:
+        employee_writer = csv.writer(employee_file, delimiter=';', quoting=csv.QUOTE_MINIMAL)    
         for lista2 in dataInfo:
             try:
                 # Contar apenas textos ja rotulados
@@ -84,10 +84,17 @@ def RunAnalysis(fonte, tipo):
             except IndexError:
                 x = 'null'
 
-RunAnalysis(dInfoMoney, 'polaritySentiLexNo')
-RunAnalysis(dInvesting, 'polaritySentiLexNo')
-RunAnalysis(dTrading, 'polaritySentiLexNo')
+# RunAnalysis(dInfoMoney, 'polaritySentiLexNo')
+# RunAnalysis(dInvesting, 'polaritySentiLexNo')
+# RunAnalysis(dTrading, 'polaritySentiLexNo')
 
-RunAnalysis(dInfoMoney, 'polaritySentiLexPre')
-RunAnalysis(dInvesting, 'polaritySentiLexPre')
-RunAnalysis(dTrading, 'polaritySentiLexPre')
+# RunAnalysis(dInfoMoney, 'polaritySentiLexPre')
+# RunAnalysis(dInvesting, 'polaritySentiLexPre')
+RunAnalysis(dTrading, 'polaritySentiLexPre', 'petr4')
+RunAnalysis(dTrading, 'polaritySentiLexPre', 'brfs3')
+RunAnalysis(dTrading, 'polaritySentiLexPre', 'bbdc4')
+RunAnalysis(dTrading, 'polaritySentiLexPre', 'ciel3')
+RunAnalysis(dTrading, 'polaritySentiLexPre', 'goll4')
+RunAnalysis(dTrading, 'polaritySentiLexPre', 'itsa4')
+RunAnalysis(dTrading, 'polaritySentiLexPre', 'natu3')
+RunAnalysis(dTrading, 'polaritySentiLexPre', 'abev3')

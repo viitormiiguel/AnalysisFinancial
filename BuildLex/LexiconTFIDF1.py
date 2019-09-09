@@ -53,19 +53,20 @@ def tfidf(word, blob, bloblist):
     return tf(word, blob) * idf (word, bloblist)
 
 def algo(b, t):
-    f1 = open(dTrading + today + '/lexicon-tf-idf-1.txt', 'a+', encoding="utf8")
+    # f1 = open(dTrading + today + '/lexicon-tf-idf-1.txt', 'a+', encoding="utf8")
+    f1 = open(dTrading + today + '/words-pos.txt', 'a+', encoding="utf8")
     for i, blob in enumerate(b):
         print("Top words in document {}".format(i + 1))
         scores = {word: tfidf(word, blob, b) for word in blob.words}
         sorted_words = sorted(scores.items(), key=lambda x: x[1], reverse=True)
         for word, score in sorted_words[100:]:
             print("\tWord: {}, TF-IDF: {}".format(word, round(score, 5)))
-            if t == 'n':
-                f1.write(word + ',nn,' + '-1' + '\n')
+            # if t == 'n':
+            #     f1.write(word + '\n')
             if t == 'p':
-                f1.write(word + ',nn,' + '1' + '\n')
-            if t == 'nt':
-                f1.write(word + ',nn,' + '0' + '\n')
+                f1.write(word + '\n')
+            # if t == 'nt':
+            #     f1.write(word + ',nn,' + '0' + '\n')
     f1.close()
 
 def divideDataset(fonte):
