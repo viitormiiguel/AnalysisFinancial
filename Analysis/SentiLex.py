@@ -68,7 +68,7 @@ def RunAnalysis(fonte, tipo, acao):
         next(reader)
         dataInfo = [r for r in reader]
         print(fonte + ':', len(dataInfo))
-    with open(fonte + today +'/' + tipo + '_' + acao + '.csv', mode='w') as employee_file:
+    with open(fonte + today +'/' + tipo + '_' + acao + '.csv', mode='w',  newline='') as employee_file:
         employee_writer = csv.writer(employee_file, delimiter=';', quoting=csv.QUOTE_MINIMAL)    
         for lista2 in dataInfo:
             try:
