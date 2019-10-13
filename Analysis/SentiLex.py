@@ -2,6 +2,7 @@ import nltk
 import csv 
 import re 
 import datetime 
+import json
 
 now = datetime.datetime.now()
 today = now.strftime("%Y-%m-%d")
@@ -63,6 +64,7 @@ dInvesting = 'C:/Users/vitor/Documents/GetDataset/Investing.com/'
 dTrading = 'C:/Users/vitor/Documents/GetDataset/TradingView/'
 
 def RunAnalysis(fonte, tipo, acao):
+    data = []
     with open(fonte + today +'/' + acao + '.csv') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
@@ -77,12 +79,16 @@ def RunAnalysis(fonte, tipo, acao):
                     if tipo == 'polaritySentiLexNo':
                         x = Score_sentimento_pre(lista2[2])
                         x = str(x)
+                        data.append({'text': lista2[2], 'pol': x})
                     else:
                         x = Score_sentimento(lista2[2])
                         x = str(x)
+                        data.append({'text': lista2[2], 'pol': x})
                     employee_writer.writerow([lista2[2], x])
             except IndexError:
                 x = 'null'
+    with open(fonte + today +'/' + tipo + '_' + acao + '.json', 'w') as outfile:
+        json.dump(data, outfile)
 
 # RunAnalysis(dInfoMoney, 'polaritySentiLexNo')
 # RunAnalysis(dInvesting, 'polaritySentiLexNo')

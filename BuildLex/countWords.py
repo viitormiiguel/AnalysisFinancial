@@ -96,7 +96,7 @@ def divideDataset(fonte, ativo, sgl):
                 _ = 'null'
         algo(bl2, 'n', sgl)
         algo(bl1, 'p', sgl)
-        algo(bl3, 'nt', sgl)
+        # algo(bl3, 'nt', sgl)
 
 divideDataset(dTrading, '/polaritySentiLexPre_bbdc4', 'bbdc4')
 divideDataset(dTrading, '/polaritySentiLexPre_abev3', 'abev3')
