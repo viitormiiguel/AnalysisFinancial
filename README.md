@@ -1,6 +1,6 @@
 # Análise de Sentimentos (Mercado Financeiro)
 
-Análises de Sentimentos: abordagem lexical de classificação de opinião no contexto mercado financeiro brasileiro [PDF]()
+Análises de Sentimentos: abordagem lexical de classificação de opinião no contexto mercado financeiro brasileiro [PDF](https://github.com/viitormiiguel/AnalysisFinancial/blob/master/WAIAF_2019_paper_6.pdf)
 
 1. [SentilexPT](http://xldb.fc.ul.pt/wiki/SentiLex-PT01)
 2. [OpLexiconPT](http://ontolp.inf.pucrs.br/Recursos/downloads-OpLexicon.php)
@@ -8,11 +8,13 @@ Análises de Sentimentos: abordagem lexical de classificação de opinião no co
 
 ###### Modelo de Analise 
 
-![myimage-alt-tag](https://github.com/viitormiiguel/AnalysisFinancial/blob/master/DiagramaSentimenal.png)
+![myimage-alt-tag](https://github.com/viitormiiguel/AnalysisFinancial/blob/master/img/modelo.png)
+
+![myimage-alt-tag](https://github.com/viitormiiguel/AnalysisFinancial/blob/master/img/modelo2.png)
 
 ##### Resultados por Léxico 
 
-![img-alt-text](https://github.com/viitormiiguel/AnalysisFinancial/blob/master/table.PNG)
+![img-alt-text](https://github.com/viitormiiguel/AnalysisFinancial/blob/master/img/resultados.png)
 
 # Léxico Financeiro
 
